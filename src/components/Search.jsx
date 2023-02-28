@@ -6,7 +6,7 @@ import Axios from "axios";
 const Search = ({ darkMode }) => {
   const [input, setInput] = useState("");
   const [data, setData] = useState("");
-  const searchRef = useRef();
+
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -34,6 +34,12 @@ const Search = ({ darkMode }) => {
     audio.play();
   }
 
+  const handleKeyPress = (e) => {
+    if(e.key === 'Enter' || e.witch === 13) {
+      fetchWord()
+    }
+  }
+
   return (
     <div className={darkMode ? "dark" : ""}>
       <div className='h-[100%] bg-white dark:bg-black p-10 md:px-32 lg:px-56'>
@@ -43,7 +49,8 @@ const Search = ({ darkMode }) => {
             placeholder='Type a word to search'
             className='bg-transparent outline-none text-2xl dark:text-white'
             onChange={handleChange}
-            ref={searchRef}
+            onKeyPress={handleKeyPress}
+            
           />
           <BsSearch
             size={20}
